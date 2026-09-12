@@ -1,0 +1,22 @@
+# Environment / secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# IDE
+.vscode/
