@@ -20,3 +20,11 @@ logs/
 
 # IDE
 .vscode/
+
+# dbt local credentials
+dbt_energy/profiles.yml
+
+# dbt generated files
+dbt_energy/target/
+dbt_energy/logs/
+dbt_energy/dbt_packages/

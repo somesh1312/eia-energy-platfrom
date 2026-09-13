@@ -2,3 +2,11 @@ requests
 python-dotenv
 psycopg[binary]
 pandas
+
+geopandas
+shapely
+pyogrio
+sqlalchemy
+geoalchemy2
+dbt-postgres
+matplotlib

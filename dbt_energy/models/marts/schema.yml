@@ -1,0 +1,162 @@
+version: 2
+
+models:
+
+  - name: dim_state
+    description: >
+      Geography dimension derived from EIA geographic entities and enriched
+      with Census TIGER state boundary geometry.
+
+    columns:
+
+      - name: state_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: state_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: state_name
+        data_tests:
+          - not_null
+
+
+  - name: dim_energy_series
+    description: >
+      Dimension describing individual EIA SEDS energy series and their
+      measurement units.
+
+    columns:
+
+      - name: series_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: series_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: series_description
+        data_tests:
+          - not_null
+
+      - name: unit
+        data_tests:
+          - not_null
+
+
+  - name: fact_state_energy
+    description: >
+      Annual EIA SEDS measurements by geography and energy series.
+
+    columns:
+
+      - name: energy_fact_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: state_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_state')
+                field: state_key
+
+      - name: series_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_energy_series')
+                field: series_key
+
+      - name: year
+        data_tests:
+          - not_null
+
+      - name: value
+        data_tests:
+          - not_null
+  - name: mart_state_energy_production
+    description: >
+      Annual total primary energy production by spatially mappable
+      U.S. geography, including land-area-normalized production intensity.
+
+    columns:
+
+      - name: year
+        data_tests:
+          - not_null
+
+      - name: state_id
+        data_tests:
+          - not_null
+
+      - name: state_name
+        data_tests:
+          - not_null
+
+      - name: production_billion_btu
+        data_tests:
+          - not_null
+
+      - name: land_area_sq_km
+        data_tests:
+          - not_null
+
+      - name: production_billion_btu_per_sq_km
+        data_tests:
+          - not_null
+
+      - name: geometry
+        data_tests:
+          - not_null
+  - name: mart_state_energy_balance
+    description: >
+      Annual state-level comparison of total primary energy production
+      and total energy consumption.
+
+    columns:
+
+      - name: year
+        data_tests:
+          - not_null
+
+      - name: state_id
+        data_tests:
+          - not_null
+
+      - name: state_name
+        data_tests:
+          - not_null
+
+      - name: production_billion_btu
+        data_tests:
+          - not_null
+
+      - name: consumption_billion_btu
+        data_tests:
+          - not_null
+
+      - name: energy_balance_billion_btu
+        data_tests:
+          - not_null
+
+      - name: production_consumption_ratio
+        data_tests:
+          - not_null
+
+      - name: energy_balance_category
+        data_tests:
+          - not_null
+
+      - name: geometry
+        data_tests:
+          - not_null
