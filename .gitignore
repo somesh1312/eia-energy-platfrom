@@ -28,3 +28,7 @@ dbt_energy/profiles.yml
 dbt_energy/target/
 dbt_energy/logs/
 dbt_energy/dbt_packages/
+
+data/raw/*.zip
+
+data/raw/*.xlsx

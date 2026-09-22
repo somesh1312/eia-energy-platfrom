@@ -11,3 +11,4 @@ sources:
       - name: eia_seds
 
       - name: us_state_boundaries
+      - name: eia860_plants

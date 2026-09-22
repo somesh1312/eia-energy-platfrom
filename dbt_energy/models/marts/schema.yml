@@ -8,7 +8,6 @@ models:
       with Census TIGER state boundary geometry.
 
     columns:
-
       - name: state_key
         data_tests:
           - not_null
@@ -30,7 +29,6 @@ models:
       measurement units.
 
     columns:
-
       - name: series_key
         data_tests:
           - not_null
@@ -55,7 +53,6 @@ models:
       Annual EIA SEDS measurements by geography and energy series.
 
     columns:
-
       - name: energy_fact_key
         data_tests:
           - not_null
@@ -84,13 +81,14 @@ models:
       - name: value
         data_tests:
           - not_null
+
+
   - name: mart_state_energy_production
     description: >
       Annual total primary energy production by spatially mappable
       U.S. geography, including land-area-normalized production intensity.
 
     columns:
-
       - name: year
         data_tests:
           - not_null
@@ -118,13 +116,14 @@ models:
       - name: geometry
         data_tests:
           - not_null
+
+
   - name: mart_state_energy_balance
     description: >
       Annual state-level comparison of total primary energy production
       and total energy consumption.
 
     columns:
-
       - name: year
         data_tests:
           - not_null
@@ -158,5 +157,65 @@ models:
           - not_null
 
       - name: geometry
+        data_tests:
+          - not_null
+
+
+  - name: stg_eia860_plants
+    description: >
+      Cleaned EIA-860 annual power plant records with typed coordinates
+      and explicit spatial eligibility.
+
+    columns:
+      - name: plant_snapshot_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: report_year
+        data_tests:
+          - not_null
+
+      - name: plant_code
+        data_tests:
+          - not_null
+
+      - name: plant_name
+        data_tests:
+          - not_null
+
+      - name: state
+        data_tests:
+          - not_null
+
+      - name: is_spatially_mappable
+        data_tests:
+          - not_null
+
+
+  - name: dim_power_plant
+    description: >
+      EIA-860 power plant snapshots enriched with PostGIS point geometry
+      for spatial analysis.
+
+    columns:
+      - name: plant_snapshot_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: report_year
+        data_tests:
+          - not_null
+
+      - name: plant_code
+        data_tests:
+          - not_null
+
+      - name: plant_name
+        data_tests:
+          - not_null
+
+      - name: is_spatially_mappable
         data_tests:
           - not_null
